@@ -1,20 +1,14 @@
 import math
 x=input().split(',')
 
-b = int('0'+x[1])
+a = x[0]  #จนเต็ม
+b= '0'+x[1] #ไม่ซ้ำ
+c = b+x[2] #ซ้ำ
 
-frac =int(b+x[2])
-
-bot  = ('9'*(len(x[1])-1)+'0'*(len(x[b])-1))
-print(bot)
-top = (int(frac)-b)*int(bot)
-mo = math.gcd(top,int(bot))
-print(top//mo,'/',int(bot)//mo)
-
-# top = int(b)-int(c)
-
-
-
-
-
-
+top = int(b+x[2])-int(b)
+bot = int('9'*len(x[2])+'0'*(len(b)-1))
+top2 = top + int(a)*bot
+div = math.gcd(top2,bot)
+st = top2//div
+nd = bot//div
+print(st,'/',nd)
