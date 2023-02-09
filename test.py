@@ -1,7 +1,4 @@
-# def checkPass(com,cal1,cal2):
-#     if  cal2 >= 'C':
-#         return True
-#     else:
-#         return False
-print('B'>'C')
-# print(checkPass('A','C','B'))
+x=5
+y=10
+x,y=y,x
+print(x,y)
