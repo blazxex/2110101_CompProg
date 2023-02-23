@@ -1,24 +1,24 @@
-command = input()
-
-RLE = []
-count=1
-if command == 'str2RLE':
-    code = input()
-    for i in range(len(code)-1):
-        if code[i]==code[i+1]:
-            count+=1
+def str2RLE(text):
+    n=1
+    for i in range(len(text)-1):
+        if text[i]!=text[i+1]:
+            print(text[i],n,end=' ')
+            n=1
         else:
-            RLE.append(code[i])
-            RLE.append(str(count))
-            count=1
-        
-    print(' '.join(RLE))
-elif command == 'RLE2str':
-    code = input().splir()
-    for j in range(0,len(code),2):
-        print(code[j]*int(code[j+1]),end='')
+            n+=1
+    pass
+def RLE2str(text):
+    for i in range(0,len(text),2):
+        print(str(text[i])*int(text[i+1]),end='')
+
+
+
+command = input()
+if command =='str2RLE':
+    str2RLE(input()+' ')
+elif command =='RLE2str':
+    x = input().split()
+    RLE2str(x)
 else:
-    print('Error')
-            
-        
-            
+    print("Error")
+

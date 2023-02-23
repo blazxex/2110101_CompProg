@@ -1,14 +1,24 @@
-import math
-x=input().split(',')
+# i =1
+# x = input().split()
+# red=int(x[0])
+# blue = int(x[1])
+# while True:
+#     x = input().split()
+#     if x[0] == 'Zig-Zag':
+#         break
+#     if i%2==1:
+#         red = min(red,int(x[0]))
+#         blue = max(blue,int(x[1]))
+#     elif i%2==0:
+#         red = min(int(x[1]),red)
+#         blue = max(int(x[0]),blue)
+# print(red,blue)
+# print(blue,red)
+x=[]
+while True:
+    y = input().split()
+    if y[0]=='Zig-Zag' or y[0]=='Zag-Zig':
+        break
+    x = x+[[int(a),int(b)] for a,b in y]
+    
 
-a = x[0]  #จนเต็ม
-b= '0'+x[1] #ไม่ซ้ำ
-c = b+x[2] #ซ้ำ
-
-top = int(b+x[2])-int(b)
-bot = int('9'*len(x[2])+'0'*(len(b)-1))
-top2 = top + int(a)*bot
-div = math.gcd(top2,bot)
-st = top2//div
-nd = bot//div
-print(st,'/',nd)

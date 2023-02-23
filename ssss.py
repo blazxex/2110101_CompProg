@@ -33,3 +33,6 @@ while i<len(result)-1:
 if 1<=target<=10:
     print(score_in_frame[target-1])
 else: print(sum(score_in_frame))
+print()
+x = abs(
+for i in range()

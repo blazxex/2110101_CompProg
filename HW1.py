@@ -54,28 +54,6 @@ def iou(r1, r2):
 
 #======================================
 
-r1=[1.0, 4.0, 1.5, 2.0]
-r2=[2.0, 5.0, 2.5, 2.0]
-r3=[4.0, 5.5, 1.5, 3.5]
-r4=[6.0, 4.5, 1.5, 2.0]
-r5=[5.75, 7.0, 2.0, 5.0]
-r6=[-5.75, 7.0, 2.0, 5.0]
-# print(center(r1))
-# print(center(r2))
-# print(round(distance(r1,r2),2))
-# print(round(distance(r3,r4),2))
-
-# print(intersection(r1,r2)) 
-# print(intersection(r2,r3))
-# print(intersection(r4,r5))
-# print(intersection(r1,r5)) # กรณีโบนัส
-# print(union(r1,r2))
-# print(union(r2,r3))
-# print(union(r4,r5))
-# print(round(iou(r1,r2),2))
-# print(round(iou(r2,r3),2))
-# print(round(iou(r4,r5),2))
-print(intersection(r4,r6))
 
 # [1.75, 3.0]
 # [3.25, 4.0]
@@ -91,3 +69,122 @@ print(intersection(r4,r6))
 # 0.07
 # 0.11
 # 0.3
+
+def test_center():
+    ans  = [center([1, 5, 2, 2])]
+    ans += [center([1, 5, 2, 4])]
+    ans += [center([1, 5, 4, 2])]
+    ans += [center([-1, 1, 4, 2])]
+    ans += [center([10.5, 20.2, 6.6, 7.8])]
+    soln = [[2.0, 4.0], [2.0, 3.0], [3.0, 4.0], [1.0, 0.0], [13.8, 16.3]]
+    print('test_center', (ans==soln))
+    
+def test_distance():
+    r = [[1, 4, 2, 2], [1, 1, 2, 2], [4, 4, 2, 2], [4, 1, 2, 2]]
+    ans  = [round(distance(r[0], r[0]),6)]
+    ans += [round(distance(r[0], r[1]),6)]
+    ans += [round(distance(r[0], r[2]),6)]
+    ans += [round(distance(r[0], r[3]),6)]
+    ans += [round(distance(r[1], r[2]),6)]
+    soln = [0.0, 3.0, 3.0, 4.242641, 4.242641]
+    print('test_distance', (ans==soln))
+
+def test_intersection():
+    r = [
+        [0, 40, 30, 30],
+        [10, 60, 20, 30],
+        [20, 30, 20, 10],
+        [20, 20, 20, 30],
+        [5, 35, 20, 20],
+    ]
+    ans  = [intersection(r[0], r[0])]
+    ans += [intersection(r[1], r[0])]
+    ans += [intersection(r[0], r[1])]
+    ans += [intersection(r[2], r[0])]
+    ans += [intersection(r[0], r[2])]
+    ans += [intersection(r[3], r[0])]
+    ans += [intersection(r[0], r[3])]
+    ans += [intersection(r[4], r[0])]
+    ans += [intersection(r[0], r[4])]
+    soln = [900.0, 200.0, 200.0, 100.0, 100.0, 100.0, 100.0, 400.0, 400.0]
+    print('test_intersection', (ans==soln))
+
+def test_intersection_bonus():
+    r = [
+        [0, 40, 30, 30],
+        [30, 60, 10, 2],
+        [30, 40, 10, 20],
+        [20, 70, 5, 30],
+        [40, 70, 5, 5],
+        [-10, 70, 5, 5],
+    ]
+    ans  = [intersection(r[0], r[0])]
+    ans += [intersection(r[1], r[0])]
+    ans += [intersection(r[0], r[1])]
+    ans += [intersection(r[2], r[0])]
+    ans += [intersection(r[0], r[2])]
+    ans += [intersection(r[3], r[0])]
+    ans += [intersection(r[0], r[3])]
+    ans += [intersection(r[4], r[0])]
+    ans += [intersection(r[0], r[4])]
+    ans += [intersection(r[5], r[0])]
+    ans += [intersection(r[0], r[5])]
+    soln = [900.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    print('test_intesection_bonus', (ans==soln))
+
+def test_union():
+    r = [
+        [0, 40, 30, 30],
+        [10, 60, 20, 30],
+        [20, 30, 20, 10],
+        [20, 20, 20, 30],
+        [5, 35, 20, 20],
+    ]
+    ans  = [union(r[0], r[0])]
+    ans += [union(r[1], r[0])]
+    ans += [union(r[0], r[1])]
+    ans += [union(r[2], r[0])]
+    ans += [union(r[0], r[2])]
+    ans += [union(r[3], r[0])]
+    ans += [union(r[0], r[3])]
+    ans += [union(r[4], r[0])]
+    ans += [union(r[0], r[4])]
+    soln = [900.0, 1300.0, 1300.0, 1000.0, 1000.0, 1400.0, 1400.0, 900.0, 900.0]
+    print('test_union', (ans==soln))
+
+def test_iou():
+    r = [
+        [0, 40, 30, 30],
+        [10, 60, 20, 30],
+        [20, 30, 20, 10],
+        [20, 20, 20, 30],
+        [5, 35, 20, 20],
+    ]
+    ans  = [round(iou(r[0], r[0]),6)]
+    ans += [round(iou(r[1], r[0]),6)]
+    ans += [round(iou(r[0], r[1]),6)]
+    ans += [round(iou(r[2], r[0]),6)]
+    ans += [round(iou(r[0], r[2]),6)]
+    ans += [round(iou(r[3], r[0]),6)]
+    ans += [round(iou(r[0], r[3]),6)]
+    ans += [round(iou(r[4], r[0]),6)]
+    ans += [round(iou(r[0], r[4]),6)]
+
+    soln = [
+            1.0,
+            0.153846,
+            0.153846,
+            0.1,
+            0.1,
+            0.071429,
+            0.071429,
+            0.444444,
+            0.444444,
+          ]
+    print('test_iou', (ans==soln))
+
+test_center()
+test_distance()
+test_intersection()
+test_union()
+test_iou()
