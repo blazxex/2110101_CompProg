@@ -1,30 +1,42 @@
-# y= input()
-# x = input()
+# import urllib.request
 
-# count = 0
-# count_y = 0
-# for i in range(len(x)):
-#     if x[i]==y[0]:
-#         for j in range(0,len(y)):
-#             if x[i+j]==y[j]:
-#                 count+=1
-#             if count == len(y):
-#                 count=0
-#                 count_y+=1
+# def find(s, start, c):
+#     for i in range(start, len(s)):
+#         if s[i] == c: return i
+#     return -1
 
-# print(count_y)
-# x = [int(x) for x in input().split()]
-# a = x+['a']
-# print(a)
+# url = "http://air4thai.pcd.go.th/services/getNewAQI_XML.php?stationID=52t"
+# web = urllib.request.urlopen(url)
+# for line in web:
+#     line = line.decode()
+#     if "<PM25 value=" in line:
+#         i = find(line, 0, '"')
+#         j = find(line, i+1, '"')
+#         print("PM 2.5 =", line[i:j])
+#         break
 
-# x = [1,2,3,4,5]
-# y=[9,9,9,9,8]
-# y.sort()
-# x=y
-# print(x)
+# s = '1235rewfadsf'
+# # print(s[::-1])
+# def thousands_separator(n):
+#     x = str(n)
+#     num = len(x)
+#     mo = (num%3)
+#     y=''
+#     if mo!= 0:
+#         y=x[:mo]+','
+#     for i in range(mo,len(x)-2,3):
+#         y += x[i:i+3]+','
+#     return y[:len(y)-1]
+# print(thousands_separator(101))
 
-x= [[1,2],[3,4],[5,5]]
-y=[[1,99],[3,66]]
-for [a,b] in x:
-    print(a,b)
-  
+# fin = open('data.txt','r')
+# lin = fin.readline()
+# print(lin[:-1])
+# for lin in fin:
+#     print(lin[:-1])
+# fin.close()
+
+a='sdad'
+print(a[0:0])
+print(ord('s'),ord('B'))
+print((2<2))
