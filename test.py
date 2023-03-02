@@ -36,7 +36,8 @@
 #     print(lin[:-1])
 # fin.close()
 
-a='sdad'
-print(a[0:0])
-print(ord('s'),ord('B'))
-print((2<2))
+# a='sdad'
+# print(a[0:0])
+# print(ord('s'),ord('B'))
+# print((2<2))
+print(4**5//2)
