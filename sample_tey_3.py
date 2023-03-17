@@ -22,9 +22,9 @@ def rename(line,pattern,new_word):
     out+= line[k1:]
     return out
 
-file_name = input()
-pattern = input()
-new_word = input()
+file_name = 'data.txt'
+pattern = 'T?m?'.lower()
+new_word = 'Python'  
 
 f = open(file_name)
 for line in f:
