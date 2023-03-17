@@ -10,7 +10,8 @@ def match(line,color):
     for x in color:
         id= lower_line.find(x)
         if id != -1:
-            line = line[:id]+"<"+x+'>'+line[id:id+len(x)]+"</>" + line[id+len(x):]
+            tag = "<"+x+'>'+line[id:id+len(x)]+"</>"
+            line = line[:id]+tag + line[id+len(x):]
             lower_line = line.lower()
     return line
 

@@ -5,8 +5,6 @@ def match(text,pattern):
         if text[i].lower()!=pattern[i] and pattern[i]!= '?':
             return False
     return True
-
-
 def rename(path,pattern,new_word):
     idx_1 = 0
     out = ''
@@ -21,13 +19,12 @@ def rename(path,pattern,new_word):
             out+= check + '/'
         idx_1 = idx_2+1
     out += path[idx_1:]
-    return out
-    
+    return out  
 file_name = input()
 pattern = input()
 new_word = input()
 
-f = open(file_name)
+f = open(file_name,'r')
 for line in f:
     line = line.strip()
     print(rename(line,pattern,new_word))
