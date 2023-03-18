@@ -11,7 +11,7 @@ def match(line,color):
         id= lower_line.find(x)
         if id != -1:
             tag = "<"+x+'>'+line[id:id+len(x)]+"</>"
-            line = line[:id]+tag + line[id+len(x):]
+            line = str(line[:id])+tag+str(line[id+len(x):])
             lower_line = line.lower()
     return line
 
@@ -23,4 +23,3 @@ color = [cl.lower() for cl in color]
 for line_2 in f2:
     print(match(line_2.rstrip(),color))
 f2.close()
-
