@@ -32,5 +32,9 @@
 #     print(rename(line,pattern,new_word))
 # f.close()
 
-a = [6,7,8,9,0]
-print(type(str(a[1:])+str(a[1])))
+# a = [6,7,8,9,0]
+# print(type(str(a[1:])+str(a[1])))
+
+a = { 'x':'y'}
+a['x']+='sdasd'
+print(a)

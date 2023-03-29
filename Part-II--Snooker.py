@@ -4,39 +4,35 @@ point = { 'R' : 1 ,
  'W' : 4 ,
  'B' : 5 ,
  'P' : 6 ,
- 'K' : 7  }
+ 'K' : 7 ,
+ 'X':0}
 player_score = {'1':0, '2':0}
-score= 0 
-def check_falue(play,red):
-    if red!= 0 and play[0]!= 'R':
-        return True
-    return False
-def cal_score(order,red):
-    player_id = order[0]
-    play = order[1:]
-    if check_falue(play,red) !=True:
-        for x in play:
-            if x != 'X':
-                player_score[player_id] += point[x]
-    
+r = 7
+colored = 6
 
-order = input()
-red = 7
-while order[1]!='K':
-    player_id = order[0]
-    if order[1]=='R':
-        red-=1
-    cal_score(order,red)
-    order = input()
-    print(player_score['1'],player_score['2'],red)
-    
+def has_red(order):
+    score = 0
+    for ball in order:
+        score += point[ball]
+    return score
 
-p1_score = player_score['1']
-p2_score = player_score['2']
-print(p1_score,p2_score)
-if p1_score == p2_score:
-    print("Tie")
-elif p1_score<p2_score:
-    print('Player 2 wins')
-elif p1_score > p2_score:
+while True:
+    turn = input()
+    player = turn[0]
+    order = turn[1:]
+    player_score[player]+=has_red(order)
+    if turn[1] =='K':
+        break
+    
+score_1 = player_score['1']
+score_2 = player_score['2']
+print(score_1,score_2)
+if score_1 == score_2:
+    print('Tie')    
+elif score_1> score_2:
     print('Player 1 wins')
+else:
+    print('Player 2 wins')
+
+    
+    
