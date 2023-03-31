@@ -1,6 +1,3 @@
-
-
-
 def in_all(malls):
     i = 0
     sum_mall = set()
