@@ -1,0 +1,116 @@
+import random
+
+class Grader: 
+def __init__(self): (2 คะแนน)
+
+
+self.users = []
+
+def new_user(self, user_id, user_name): (4 คะแนน)
+
+
+user = User(user_id, user_name)
+
+self.users.append(user)
+
+return user
+
+def submit(self, user, problem_id, code):
+
+
+if user not in self.users: return
+
+score = self.grade(problem_id, code) 
+user.save_submission(problem_id, code, score)
+
+def grade(self, problem_id, code):
+
+
+return random.randint(0,100) 
+def top_users(self): 
+if len(self.users) == 0: return []
+
+u = sorted(self.users)[::-1] 
+for k in range(1, len(u)): 
+if u[k] < u[k-1]: return u[:k] 
+return u
+
+
+class User:
+
+def __init__(self, user_id, user_name): 
+self.id = user_id
+
+self.name = user_name
+
+self.submissions = dict() 
+def save_submission(self, problem_id, code, score): (5 คะแนน)
+
+
+if problem_id not in self.submissions:
+
+self.submissions[problem_id] = []
+
+self.submissions[problem_id].append((code, score))
+
+def total_score(self): (5 คะแนน)
+
+
+
+total = 0
+
+for problem_id in self.submissions:
+
+total += self.score(problem_id) return total
+
+def __lt__(self, rhs): 
+return self.total_score() < rhs.total_score()
+
+1
+
+2
+
+หเลขประจำตัว ห องสอบ.....................เลขที่ในใบเซ็นชื่อเข าสอบ น าที่ 13/13
+
+
+def score(self, problem_id):
+
+
+max_score = 0
+
+if problem_id in self.submissions:
+
+for code,sc in self.submissions[problem_id]:
+
+if sc > max_score: max_score = sc
+
+return max_score
+
+def __str__(self):
+
+out = self.id + ': ' + self.name + ' [ '
+
+for pid in self.submissions:
+
+out += pid + ':' + str(self.score(pid))+' '
+
+return out + ']'
+
+
+
+g = Grader() 
+u1 = g.new_user('u001', 'ปริก') 
+u2 = g.new_user('u002', 'แยม้ ')
+
+u3 = g.new_user('u003', 'ผิน')
+
+g.submit(u1, 'p001', 'print("ok1")') 
+g.submit(u1, 'p001', 'print("ok2")') 
+g.submit(u2, 'p001', 'print("ok3")') 
+g.submit(u2, 'p002', 'print("ok4")') 
+g.submit(u3, 'p002', 'print("ok5")') 
+tops = g.top_users() 
+สุด)
+
+for u in tops: 
+print(u.id, u.name, ',', u.total_score(), ':', u.submissions)
