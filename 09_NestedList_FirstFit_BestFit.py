@@ -16,11 +16,13 @@ def best_fit(L,e):
     return L[max_index].append(e)
 
 def partition_FF(D):
-    temp = D.copy()
-    for x in D:
+    l = []
+    for e in D:
+        first_fit(l,e)
+    return l
         
         
         
             
     
-print(partition_FF([50,90,10,80,50,20]))
+L=[[50],[90]];best_fit(L,10);print(L)

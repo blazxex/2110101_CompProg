@@ -1,0 +1,74 @@
+import random
+class Grader: # ไวส้ รา้ งออบเจ็กต์ของระบบ Grader แบบง่าย ๆ
+def __init__(self): (2 คะแนน)
+# สรา้ งทเ ี ก็บ user ต่าง ๆ ของระบบ grader
+self.users = []
+def new_user(self, user_id, user_name): (4 คะแนน)
+# สรา้ ง user ใหม่ทม ี ีรหัส user_id และชอ ื user_name, บันทึกเก็บใน grader, แลว้ ก็คืน user ใหม่น0ีเป็นผลลัพธ์
+user = User(user_id, user_name)
+self.users.append(user)
+return user
+def submit(self, user, problem_id, code):
+# รับการ submit โปรแกรม code ของโจทย์ปัญหา problem_id ส่งไปเก็บใส่ลิสต์ของ submissions ของ user
+if user not in self.users: return
+score = self.grade(problem_id, code) # เรียกใชเ้ มท็อด grade เพ ือตรวจใหค้ ะแนน code
+user.save_submission(problem_id, code, score)
+def grade(self, problem_id, code):
+# เกรดเดอร์ตัวน0ีถูกตัง0 ในสภาวะทดสอบ ของจริงไม่ทำแบบคำส ังขา้ งล่างน0ีนะ !!!
+return random.randint(0,100) # สุ่มจำนวนเต็มระหว่าง 0 ถึง 100
+def top_users(self): # คืนลิสต์ของ user ทั0งหลาย ที มีคะแนนรวมมากสุด
+if len(self.users) == 0: return []
+u = sorted(self.users)[::-1] # u เก็บ user ทม ี ีคะแนนรวมเรียงจากมากไปนอ้ ย
+for k in range(1, len(u)): # หาตำแหน่ง k นอ้ ยสุดท ีตัวท  ี k-1 กับตัวท  ี k มีคะแนนรวมไม่เท่ากัน
+if u[k] < u[k-1]: return u[:k] # นั นคือตัวที 0 ถึง k-1 มีคะแนนรวมเท่ากันหมด และเท่ากับคะแนนสูงสุด
+return u
+#-------------------------------------------------------
+class User:
+def __init__(self, user_id, user_name): # เก็บรหัส ชื อ และ submissions ของโจทย์ปัญหาทั0งหลายของ user นี0
+self.id = user_id
+self.name = user_name
+self.submissions = dict() # {problem_id: [(code0,score0), (code1,score1), ...], ...}
+def save_submission(self, problem_id, code, score): (5 คะแนน)
+# จัดเก็บการส่งโปรแกรม code ของโจทย์ปัญหา problem_id ทไ ี ดค้ ะแนน score เก็บใส่ submissions
+if problem_id not in self.submissions:
+self.submissions[problem_id] = []
+self.submissions[problem_id].append((code, score))
+def total_score(self): (5 คะแนน)
+# คืนผลรวมของคะแนนของทุก ๆ โจทย์ปัญหาที  user คนนี0เคย submit
+# (คะแนนของโจทย์ปัญหาหน ึง คือคะแนนมากสุดของ submissions ต่าง ๆ ของโจทย์นัน0 , ดูเมท็อด score ในหนา้ ถัดไป)
+total = 0
+for problem_id in self.submissions:
+total += self.score(problem_id) return total
+def __lt__(self, rhs): # ใชค้ ะแนนรวมของ user เป็นตัวเปรียบเทียบ (4 คะแนน)
+return self.total_score() < rhs.total_score()
+1
+2
+หเลขประจำตัว ห องสอบ.....................เลขที่ในใบเซ็นชื่อเข าสอบ น าที่ 13/13
+# สองเมท็อดขา้ งล่างน0ี เป็นของคลาส User (เขียนต่อจากหนา้ ทแ ี ลว้ )
+def score(self, problem_id):
+# คืนคะแนนของ submission ของโจทย์ปัญหา problem_id (ถา้ เคยส่งหลายครั0ง ก็ใชค้ รัง0 ทไ ี ดมากสุด)
+max_score = 0
+if problem_id in self.submissions:
+for code,sc in self.submissions[problem_id]:
+if sc > max_score: max_score = sc
+return max_score
+def __str__(self):
+out = self.id + ': ' + self.name + ' [ '
+for pid in self.submissions:
+out += pid + ':' + str(self.score(pid))+' '
+return out + ']'
+#-------------------------------------------------------
+# ศึกษาตัวอย่างการใชง้ าน
+g = Grader() # สรา้ งระบบ grader
+u1 = g.new_user('u001', 'ปริก') # สรา้ ง user ใหม่ 3 ราย
+u2 = g.new_user('u002', 'แยม้ ')
+u3 = g.new_user('u003', 'ผิน')
+g.submit(u1, 'p001', 'print("ok1")') # u1 ขอ submit โปรแกรมของโจทย์ปัญหา p001
+g.submit(u1, 'p001', 'print("ok2")') # u1 ขอ submit โปรแกรมของโจทย์ปัญหา p001 อีกครั0ง
+g.submit(u2, 'p001', 'print("ok3")') # u2 ขอ submit โปรแกรมของโจทย์ปัญหา p001
+g.submit(u2, 'p002', 'print("ok4")') # u2 ขอ submit โปรแกรมของโจทย์ปัญหา p002
+g.submit(u3, 'p002', 'print("ok5")') # u3 ขอ submit โปรแกรมของโจทย์ปัญหา p002
+tops = g.top_users() # ขอ user ทัง0 หลายทไ ี ดค้ ะแนนรวมมากสุด (อาจมีหลายรายทไ ี ดค้ ะแนนมาก
+สุด)
+for u in tops: # หยิบ user ทไ ี ดค้ ะแนนรวมมากสุด แต่ละรายมาแสดง
+print(u.id, u.name, ',', u.total_score(), ':', u.submissions)
